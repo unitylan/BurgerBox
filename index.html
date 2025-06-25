@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BurgerBox</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    .slide-fade {
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    .slide-fade.active {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="font-sans text-gray-800">
+  <!-- Glassmorphic NAVIGATION -->
+  <nav class="absolute top-8 left-1/2 -translate-x-1/2 z-20 flex items-center justify-center gap-16 px-8 py-4 rounded-3xl shadow-lg backdrop-blur-md bg-white/30 border border-white/40 max-w-4xl w-[90%]">
+    <div class="flex gap-8">
+      <a href="#home" class="hover:underline font-semibold">Home</a>
+      <a href="#about" class="hover:underline font-semibold">About Us</a>
+      <a href="#menu" class="hover:underline font-semibold">Menu</a>
+    </div>
+  
+    <img src="images/logo.avif" alt="BurgerBox Logo" class="h-12 md:h-24 transition-all duration-300" />
+  
+    <div class="flex gap-8">
+      <a href="#location" class="hover:underline font-semibold">Locations</a>
+      <a href="#franchise" class="hover:underline font-semibold">Franchise</a>
+      <a href="#contact" class="hover:underline font-semibold">Contact</a>
+    </div>
+  </nav> 
+       
+  <!-- HERO SECTION: Slideshow -->
+  <section class="relative h-[600px] overflow-hidden">
+
+    <div id="slideshow" class="absolute inset-0 h-full w-full">
+     <!-- Slide 1 -->
+     <div class="absolute inset-0 w-full h-full slide-fade active flex items-center justify-center">
+      <img src="images/billboard.jpg" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 flex items-center justify-end px-4">
+        <h2 class="text-white text-4xl md:text-6xl lg:text-8xl font-extrabold drop-shadow-lg text-right">
+          Your <br> Neighbourhood <br> Drive In
+        </h2>
+      </div>
+     </div>
+
+      <!-- Slide 2 (split) -->
+      <div class="absolute inset-0 w-full h-full flex slide-fade">
+        <div class="relative w-1/2 h-full">
+          <img src="images/slide2.jpg" class="w-full h-full object-cover" />
+          <div class="absolute bottom-6 left-6 max-w-xs">
+            <h3 class="text-white text-2xl md:text-3xl font-extrabold drop-shadow-lg mb-2">Classic Roadhouse</h3>
+            <p class="text-white text-base md:text-lg font-medium drop-shadow-md leading-snug">Enjoy mouth-watering ribs, smoky BBQ sauce, and crispy sides in true drive-in style, just like the good old days."</p>
+          </div>
+        </div>
+        <div class="relative w-1/2 h-full">
+          <img src="images/slide2-5.jpg" class="w-full h-full object-cover" />
+          <div class="absolute bottom-6 left-6 max-w-xs">
+            <h3 class="text-white text-2xl md:text-3xl font-extrabold drop-shadow-lg mb-2">Modern Favourites</h3>
+            <p class="text-white text-base md:text-lg font-medium drop-shadow-md leading-snug">Discover our new twists on classic meals, crafted for today's tastes and fresh for every visit.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Slide 3 -->
+      <div class="absolute inset-0 w-full h-full slide-fade">
+        <img src="images/slide3.jpg" class="w-full h-full object-cover" />
+      </div>
+      
+    </div>
+    <!-- Pagination Dots -->
+    <div id="slideshow-dots" class="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-3 z-10">
+      <button class="w-3 h-3 rounded-full bg-white/60 border border-white transition-all" aria-label="Go to slide 1"></button>
+      <button class="w-3 h-3 rounded-full bg-white/60 border border-white transition-all" aria-label="Go to slide 2"></button>
+      <button class="w-3 h-3 rounded-full bg-white/60 border border-white transition-all" aria-label="Go to slide 3"></button>
+    </div>
+  </section>
+
+  <script>
+    const slides = document.querySelectorAll("#slideshow > div");
+    const dots = document.querySelectorAll("#slideshow-dots button");
+    let current = 0;
+    function showSlide(idx) {
+      slides[current].classList.remove("active");
+      dots[current].classList.remove("bg-white", "border-yellow-400");
+      dots[current].classList.add("bg-white/60");
+      current = idx;
+      slides[current].classList.add("active");
+      dots[current].classList.add("bg-white", "border-yellow-400");
+      dots[current].classList.remove("bg-white/60");
+    }
+    dots.forEach((dot, idx) => {
+      dot.addEventListener("click", () => showSlide(idx));
+    });
+    setInterval(() => {
+      showSlide((current + 1) % slides.length);
+    }, 6000);
+    // Initialize first dot as active
+    dots[0].classList.add("bg-white", "border-yellow-400");
+    dots[0].classList.remove("bg-white/60");
+  </script>
+
+  <!-- ABOUT US -->
+  <section id="about" class="relative flex flex-col items-center gap-4 p-8 pb-48 bg-white z-20">
+    <h2 class="text-4xl font-bold text-center w-full relative">Our Story
+      <span class="block w-full absolute left-1/2 -translate-x-1/2 top-full ">
+        <svg width="180" height="24" viewBox="0 0 180 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mx-auto">
+          <path d="M10 20 Q90 0 170 20" stroke="#C53030" stroke-width="4" fill="none" stroke-linecap="round"/>
+        </svg>
+      </span>
+    </h2>
+    <p class="text-center max-w-5xl mx-auto mt-4">The Burger Box motto is, "Good Food and a Smile... That's Roadhouse Style", - great food, cooked on the premises in the original Roadhouse way, using the freshest ingredients of the highest quality. Quick, friendly service in a comfortable setting, our generous portions and competitive pricing make for great value for money.</p>
+    <p class="text-center max-w-5xl mx-auto">The establishment, where the original Burger Box Roadhouse is today, began sixty years ago in Krugersdorp. It was a fast food store in the 50's and became a roadhouse in the 60's.
+      During the 1980's it took the name Burger Box and evolved into the business it is today.
+      With 3 branches now operating in Krugersdorp, Benoni, and Centurion. The Burger Box brand is spreading its wings and branching into Montana soon. Look out for new stores opening in the near future.
+    </p>
+    <!-- Overlapping Cards -->
+    <div class="absolute left-1/2 -bottom-32 -translate-x-1/2 w-full max-w-5xl flex flex-col md:flex-row gap-6 justify-center z-30">
+      <div class="bg-white rounded-xl shadow-lg p-8 flex-1 flex flex-col items-center text-center border-t-4 border-black relative">
+        <i class="fa-solid fa-car-side text-4xl text-red-700 mb-4"></i>
+        <h3 class="font-semibold text-lg mb-2">Dine in Your Car</h3>
+        <p class="text-gray-500 text-sm">Customers can sit and eat in their parked vehicles in the traditional roadhouse manner.</p>
+      </div>
+      <div class="bg-white rounded-xl shadow-lg p-8 flex-1 flex flex-col items-center text-center border-t-4 border-black relative">
+        <i class="fa-solid fa-utensils text-4xl text-red-700 mb-4"></i>
+        <h3 class="font-semibold text-lg mb-2">Eat Inside or Outside</h3>
+        <p class="text-gray-500 text-sm">Can eat their meal on the premises, in the sit-down restaurant or outside in our lovely garden area.</p>
+      </div>
+      <div class="bg-white rounded-xl shadow-lg p-8 flex-1 flex flex-col items-center text-center border-t-4 border-black relative">
+        <i class="fa-solid fa-bag-shopping text-4xl text-red-700 mb-4"></i>
+        <h3 class="font-semibold text-lg mb-2">Order to Go or Dine-In</h3>
+        <p class="text-gray-500 text-sm">Food can also be ordered to go, and taken home safely packed in our specially designed take-out packaging. In order to save time customers can phone their order through to us in advance.</p>
+      </div>
+    </div>
+  </section>
+  <!-- Spacer for card overlap -->
+  <div class="h-20 md:h-12"></div>
+
+  <!-- BROWSE MENU CATEGORIES (New Card Grid Design) -->
+  <section id="menu" class="bg-black text-gray-50 py-24">
+    <h2 class="text-4xl font-bold text-center w-full relative mt-8">What Our Roadies Love
+      <span class="block w-full absolute left-1/2 -translate-x-1/2 top-full ">
+        <svg width="180" height="24" viewBox="0 0 180 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mx-auto">
+          <path d="M10 20 Q90 0 170 20" stroke="#C53030" stroke-width="4" fill="none" stroke-linecap="round"/>
+        </svg>
+      </span>
+    </h2>    
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-4 mt-12 relative">
+      <!-- Column 1 -->
+      <div class="flex flex-col gap-8">
+        <!-- Large Top Img -->
+        <div class="relative h-72 rounded-xl overflow-hidden shadow-lg">
+          <img src="images/slide2-5.jpg" alt="Burgers" class="w-full h-full object-cover" />
+          <span class="absolute bottom-4 left-4 bg-black/70 text-white px-3 py-1 rounded text-lg font-bold">Burgers</span>
+        </div>
+        <!-- Small Bottom Img -->
+        <div class="relative h-40 rounded-xl overflow-hidden shadow-lg">
+          <img src="images/breakfast.jpg" alt="Breakfast" class="w-full h-full object-cover" />
+          <span class="absolute bottom-2 left-3 bg-black/70 text-white px-2 py-1 rounded text-base font-semibold">Breakfast</span>
+        </div>
+        <!-- View Full Menu Button -->
+        <a href="images/menu.jpg" target="_blank" class="absolute -bottom-12 left-0 bg-red-700 hover:bg-red-500 text-gray-50 font-bold px-6 py-3 rounded shadow-lg transition mt-8">View Full Menu</a>
+      </div>
+      <!-- Column 2 -->
+      <div class="flex flex-col h-full">
+        <div class="relative h-80 md:h-full rounded-xl overflow-hidden shadow-lg flex-1">
+          <img src="images/pizza.jpg" alt="Pizza" class="w-full h-full object-cover" />
+          <span class="absolute bottom-4 left-4 bg-black/70 text-white px-3 py-1 rounded text-lg font-bold">Pizza</span>
+        </div>
+      </div>
+      <!-- Column 3 -->
+      <div class="flex flex-col gap-8 h-full justify-between">
+        <div class="relative flex-1 min-h-0 h-32 rounded-xl overflow-hidden shadow-lg flex">
+          <img src="images/dessert.jpg" alt="Desserts" class="w-full h-full object-cover" />
+          <span class="absolute bottom-2 left-3 bg-black/70 text-white px-2 py-1 rounded text-base font-semibold">Sweets & Desserts</span>
+        </div>
+        <div class="relative flex-1 min-h-0 h-32 rounded-xl overflow-hidden shadow-lg flex">
+          <img src="images/sunday.jpg" alt="Sunday" class="w-full h-full object-cover" />
+          <span class="absolute bottom-2 left-3 bg-black/70 text-white px-2 py-1 rounded text-base font-semibold">Sunday Lunch</span>
+        </div>
+      </div>
+    </div>
+    <div class="h-16"></div>
+  </section>
+
+  <!-- SPECIALS & PROMOS -->
+  <section class="py-10 px-6">
+    <h2 class="text-4xl font-bold text-center w-full relative ">Specials & Promos
+      <span class="block w-full absolute left-1/2 -translate-x-1/2 top-full ">
+        <svg width="180" height="24" viewBox="0 0 180 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mx-auto">
+          <path d="M10 20 Q90 0 170 20" stroke="#C53030" stroke-width="4" fill="none" stroke-linecap="round"/>
+        </svg>
+      </span>
+    </h2>  
+    <div class="max-w-5xl mx-auto flex flex-col gap-16 mt-12">
+      <!-- Daily Specials Row -->
+      <div class="flex flex-col md:flex-row items-center md:items-stretch gap-8">
+        <!-- Images -->
+        <div class="relative flex w-full md:w-1/2 min-h-[220px] md:min-h-[260px]">
+          <img src="images/monthly.jpg" alt="Burger Special" class="w-2/3 h-40 md:h-60 object-cover rounded-xl ml-4 mt-6 mb-6 z-10" />
+          <img src="images/order.jpg" alt="Breakfast Special" class="w-2/3 h-32 md:h-60 object-cover rounded-xl absolute top-28 left-20 md:left-48 z-20 border-4 border-white" style="transform: translateY(30px);" />
+        </div>
+        <!-- Text -->
+        <div class="flex-1 flex flex-col justify-center p-0 md:pl-0 md:pr-8 text-center">
+          <h3 class="text-2xl font-bold mb-4 text-gray-800">Daily Specials</h3>
+          <div class="mb-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <div class="font-semibold text-lg text-gray-800 mb-1">Monday</div>
+              <div class="text-base text-gray-700">ANY LARGE PIZZA   <span class="font-bold">50% OFF</span></div>
+              <div class="text-base text-gray-700">FULL CHICKEN & CHIPS   <span class="font-bold">R149.90</span></div>
+            </div>
+            <div class="md:border-l md:border-gray-300 md:pl-6">
+              <div class="font-semibold text-lg text-gray-800 mb-1">Tuesday</div>
+              <div class="text-base text-gray-700">BIG BOX RIBS & CHIPS   <span class="font-bold">R229.90</span></div>
+            </div>
+            <div>
+              <div class="font-semibold text-lg text-gray-800 mb-1">Wednesday</div>
+              <div class="text-base text-gray-700">CHICKEN SCHINTZEL <span class="font-bold">R89.90</span></div>
+            </div>
+            <div class="md:border-l md:border-gray-300 md:pl-6">
+              <div class="font-semibold text-lg text-gray-800 mb-1">Thursday</div>
+              <div class="text-base text-gray-700">EISBEIN   <span class="font-bold">R129.90</span></div>
+            </div>
+          </div>
+          <button class="mt-2 bg-red-700 hover:bg-red-600 text-white px-5 py-2 rounded font-semibold transition mx-auto">See All Daily Deals</button>
+        </div>
+      </div>
+      <!-- Monthly Specials Row -->
+      <div class="flex flex-col md:flex-row items-center md:items-stretch gap-8">
+        <!-- Text -->
+        <div class="flex-1 flex flex-col justify-center p-0 md:pl-8 md:pr-0 order-2 md:order-1 text-center">
+          <h3 class="text-2xl font-bold mb-4 text-gray-800">Monthly Specials</h3>
+          <div class="mb-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <div class="font-semibold text-lg text-gray-800 mb-1">CHEESY JALAPENO STEAK CALZONE</div>
+              <div class="text-base text-gray-700">Beef Strips, Cheese Sauce, Jalapenos, Grilled Mushrooms, Caramelised Onions & Cheese</div>
+            </div>
+            <div class="md:border-l md:border-gray-300 md:pl-6">
+              <div class="font-semibold text-lg text-gray-800 mb-1">BRAAI BAK GRILL COMBO</div>
+              <div class="text-base text-gray-700">Lamb chop, 150G Porterhouse Steak, 180G Boerewors, Creamy Potato Salad & Braai Broodjie</div>
+            </div>
+          </div>
+          <button class="mt-2 bg-red-700 hover:bg-red-500 text-gray-50 px-5 py-2 rounded font-semibold transition mx-auto">See All Monthly Deals</button>
+        </div>
+        <!-- Image -->
+        <div class="flex w-full md:w-1/2 min-h-[220px] md:min-h-[260px] order-1 md:order-2 justify-end items-center">
+          <img src="images/daily.jpg" alt="Monthly Special" class="w-2/3 h-40 md:h-72 object-cover rounded-xl mr-4 mt-6 mb-6" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FRANCHISE CTA -->
+  <section id="franchise" class="bg-black text-white py-10 px-6">
+    <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="md:text-left text-center flex-1">
+        <h2 class="text-2xl font-bold mb-2">Want to Own Your Own BurgerBox?</h2>
+        <p class="mb-0 md:mb-0">Start your journey today with our award-winning brand and proven business model.</p>
+      </div>
+      <div class="flex-1 flex md:justify-end justify-center w-full mt-6 md:mt-0">
+        <a href="#" class="bg-red-700 hover:bg-red-600 px-8 py-4 rounded text-white font-bold text-lg transition">Get Franchise Info</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-black text-white py-16 px-6">
+    <div class="max-w-6xl mx-auto">
+      <!-- Main Footer Content -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+        <!-- Company Info -->
+        <div class="lg:col-span-1">
+          <img src="images/logo.avif" alt="BurgerBox Logo" class="h-24 mb-4" />
+          <p class="text-gray-300 mb-4">Good Food and a Smile... That's Roadhouse Style</p>
+          <div class="flex space-x-4 text-2xl">
+            <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+        
+        <!-- Quick Links -->
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+          <ul class="space-y-2">
+            <li><a href="#home" class="text-gray-300 hover:text-white transition">Home</a></li>
+            <li><a href="#about" class="text-gray-300 hover:text-white transition">About Us</a></li>
+            <li><a href="#menu" class="text-gray-300 hover:text-white transition">Menu</a></li>
+            <li><a href="#franchise" class="text-gray-300 hover:text-white transition">Locations</a></li>
+            <li><a href="#franchise" class="text-gray-300 hover:text-white transition">Franchise</a></li>
+          </ul>
+        </div>
+        
+        <!-- Contact Info -->
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Contact Us</h3>
+          <ul class="space-y-2 text-gray-300">
+            <li class="flex items-center"><i class="fas fa-phone mr-2"></i> 011 955 4581</li>
+            <li class="flex items-center"><i class="fas fa-envelope mr-2"></i> admin@burgerbox.co.za</li>
+            <li class="flex items-baseline"><i class="fas fa-map-marker-alt mr-2"></i><span>25 Louis Friedman Street, Factoria, Krugersdorp (Head Office)</span></li>          
+          </ul>
+        </div>
+        
+        <!-- Business Hours -->
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Business Hours</h3>
+          <ul class="space-y-2 text-gray-300">
+            <li>Monday - Friday: 9:00 AM - 9:00 PM</li>
+            <li>Saturday: 9:00 AM - 9:30 PM</li>
+            <li>Sunday: 9:00 AM - 9:00 AM</li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Bottom Footer -->
+      <div class="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <div class="text-gray-400 text-sm mb-4 md:mb-0">
+          &copy; 2025 BurgerBox. All rights reserved.
+        </div>
+        <div class="flex space-x-6 text-sm">
+          <a href="#" class="text-gray-400 hover:text-white transition">Privacy Policy</a>
+          <a href="#" class="text-gray-400 hover:text-white transition">Terms of Service</a>
+          <a href="#" class="text-gray-400 hover:text-white transition">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <div class="fixed bottom-8 right-8 z-50 flex flex-col items-center space-y-1">
+    <button id="backToTop" class="hidden bg-yellow-500 hover:bg-yellow-600 text-black rounded-full p-4 shadow-lg transition-all focus:outline-none" aria-label="Back to top">
+      <i class="fas fa-arrow-up text-2xl"></i>
+    </button>
+    <span id="backToTopText" class="hidden text-sm font-semibold text-yellow-100 bg-black/70 px-3 py-1 rounded shadow">Back To Top</span>
+  </div>
+  <script>
+    // Show/hide back to top button and text
+    const backToTop = document.getElementById('backToTop');
+    const backToTopText = document.getElementById('backToTopText');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTop.classList.remove('hidden');
+        backToTopText.classList.remove('hidden');
+      } else {
+        backToTop.classList.add('hidden');
+        backToTopText.classList.add('hidden');
+      }
+    });
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
+
